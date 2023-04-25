@@ -1,32 +1,15 @@
-/*
-4/23/23
-Cesar Rodriguez
-Week 13 Question 1
-
-In Designing your game, you will need at least 2 Private Attributes in .h and 2 Parameters 
-from .cpp that will change the value of Private Data.
-
-There must be a set of decisions in .cpp (preferably a loop) that adjust the Attributes.
-
-*/
 #include<iostream>
 #include<Windows.h>
 #include "RussianRoulette.h"
 using namespace std; 
 
-
 //Function Prototypes
 int roundsAsk();
 int livesAsk();
-int spinGun();
-
 
 // Global Variables
 int rounds,
-    lives,
-    spinValue;
-
-
+    lives;
 
 int main() {
     bool play = true;       // Set to true so you can play
@@ -75,22 +58,22 @@ int main() {
                     game.gun(); 
                 } else if (spinny == "N" || spinny == "n") {
                     system("cls");
-                    Sleep(800);
+                    Sleep(80);
                     cout << "You pulled the trigger...";
-                    Sleep(900);
+                    Sleep(1200);
                     spinAgain = false;
                     if (game.shootGun() == true) { 
                         cout << "you got shot" << endl;
+                        game.gun();
                         if (one.removeLife() == 0) {
-                            one.displayLives();
                             play = false;
-                            game.gun();
-                        } 
+                        }
+                        one.displayLives();
+                        cout << "Automatically spinning the barrel to reset chances." << endl; 
                     } else {
                         cout << "Lucky duck it was a blank..." << endl;
                         Sleep(1500);
                         one.displayLives();
-                        game.gun();
                     } 
                 }
             } while (spinAgain); 
@@ -101,10 +84,12 @@ int main() {
                 Sleep(1500);
                 if (game.shootGun() == true) {
                     cout << "Unlucky bob got shot\n\n";
+                    game.gun();
                     if (bob.removeLife() == 0) {
                         cout << "Bob the bot died.\n\n" << endl;
                     } else {
                         bob.displayLives();
+                    cout << "Automatically spinning the barrel to reset chances." << endl; 
                     }
                 } else {
                     cout << "the gun went click'" << endl;
@@ -125,7 +110,6 @@ int main() {
 
     return 0;
 }
-
 
 int roundsAsk() {
     cout << "How many Rounds? " << endl;
