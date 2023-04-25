@@ -10,6 +10,7 @@ There must be a set of decisions in .cpp (preferably a loop) that adjust the Att
 
 */
 #include<iostream>
+#include<Windows.h>
 #include "RussianRoulette.h"
 using namespace std; 
 
@@ -52,7 +53,8 @@ int main() {
             cout << "You start the game\n\n" << endl;
         } else {
             cout << "Bot Starts\n\n" << endl;
-            cout << "Bob shot\n";
+            Sleep(1500);
+            cout << "Bob shot the gun\n";
             game.shootGun();
             bob.displayLives();
             cout << "\n";
@@ -66,22 +68,27 @@ int main() {
                 cout << "Would you like to spin the barrel? Y/N: ";
                 cin >> spinny;
                 if (spinny == "Y" || spinny == "y") {
+                    cout << "Spinning...";
+                    Sleep(1500);
                     spinAgain = true;
+                    cout << "The barrel was spun" << endl;
                     game.gun(); 
                 } else if (spinny == "N" || spinny == "n") {
                     system("cls");
+                    Sleep(800);
+                    cout << "You pulled the trigger...";
+                    Sleep(900);
                     spinAgain = false;
                     if (game.shootGun() == true) { 
-                        cout << "Your turn:\n";
-                        cout << "Unlucky you got shot" << endl;
+                        cout << "you got shot" << endl;
                         if (one.removeLife() == 0) {
                             one.displayLives();
                             play = false;
                             game.gun();
                         } 
                     } else {
-                        cout << "Your turn:\n";
-                        cout << "The gun went click'" << endl;
+                        cout << "Lucky duck it was a blank..." << endl;
+                        Sleep(1500);
                         one.displayLives();
                         game.gun();
                     } 
@@ -91,6 +98,7 @@ int main() {
             // Bot's turn
             if (bob.getLives() > 0) {
                 cout << "\nBot's turn: " << endl;
+                Sleep(1500);
                 if (game.shootGun() == true) {
                     cout << "Unlucky bob got shot\n\n";
                     if (bob.removeLife() == 0) {
