@@ -49,6 +49,7 @@ class RRPG {
             bool deadOrAlive = false;
             if (position == bulletSpot){
                 deadOrAlive = true;
+                position = 0;
             } else {
                 deadOrAlive = false;
             }
